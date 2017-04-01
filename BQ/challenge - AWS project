@@ -1,0 +1,36 @@
+challenge - AWS:
+
+Challenge 1：
+
+Access EC2 from browser
+1.connect ssh to EC2 instance
+2. install httpd: yum install httpd
+3. go to /var/www/html and create a index.html file 
+4. check and start up httpd
+5. Access the ip (52.27.53.57) in the browser
+
+
+I found I can't access this EC2 ip address. I found the reason after searched a lot online. The reason is the default inbound status of security groups of newly created EC2 instance is SSH allowed only. I have to go to its security groups and add an extra rule (http) to it.
+
+
+Security group is like a firewall. It can define the inbound and outbound. 
+it denied HTTP access to inbound and it has only one ssh rule. It allow everything to outbound
+
+
+
+big challenge is：
+use sql file  to generate RDS data, this is the big challennge
+
+Because new to AWS, the command and the process are complicated. 
+
+(1) sign to AWS console
+(2) Go to IAM create new user/group, user policy using IAMFullAccess
+(3) EC2 create key-value pairs
+(4) Go to Elastic Beanstalk - Creat new application. and set up RDS at the meantime (username / password)
+(5) SSH connect to EC2
+(6) Install mysql-server on EC2 and start it
+(7) connect RDS instance to EC2 (mysql -h ~~~~[rds address] -P 3306 -u bookstore -p)
+(8) UPload sql file to EC2 instance (难点就是：需要include EC2 pem file in the command), otherwise always failed.
+(9) Generate RDS data using sql file
+
+
